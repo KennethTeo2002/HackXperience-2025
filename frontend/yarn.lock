@@ -1288,6 +1288,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource-variable/albert-sans/-/albert-sans-5.2.5.tgz#881b382484df02fa2f966df3f0cca94cecbe54fc"
   integrity sha512-QOnYtT8yao9vPnuWiCDOuLZXjWxwINZBCr+gDAEmiFEhFXt69FKgYjWMPbJVjGwYuS/aEr1NZxPL9Cf56Dn+gQ==
 
+"@fontsource-variable/roboto@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/roboto/-/roboto-5.2.5.tgz#000095be8ec37991efae5de8c6404e564160f325"
+  integrity sha512-csqBSOWXv0h5IbPhEqYJua6/nxl7dSNZbBOMeXSO9aqzgPw3GpfgC9kL5M6ULFLRaoDoBD4U9QctoDLKMaTyMg==
+
 "@fontsource/roboto@^5.0.13":
   version "5.0.13"
   resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.0.13.tgz#2d6ec431a2f9dfe38ca76525c2d6bf12241f575b"
