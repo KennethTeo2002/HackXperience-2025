@@ -5,13 +5,31 @@ import { ReactNode, useState } from 'react'
 const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
 		<Flex
-			flexDir="row"
-			bgColor="white"
-			height="80px"
-			borderRadius="18px"
-			padding="10px"
+			width="100%"
+			height="128px"
+			justifyContent="center"
+			alignItems="center"
+			flexShrink="0"
 		>
-			{children}
+			<Flex
+				flexDir="row"
+				bgColor="white"
+				height="95%"
+				width="95%"
+				borderRadius="18px"
+				margin="10px"
+				padding="10px"
+				boxShadow="md"
+				_hover={{
+					bgColor: '#195AFF',
+					color: 'white',
+					height: '100%',
+					width: '100%',
+					boxShadow: 'lg',
+				}}
+			>
+				{children}
+			</Flex>
 		</Flex>
 	)
 }
@@ -64,10 +82,11 @@ const Home: React.FC = () => {
 				height="100%"
 				width="100%"
 				color="#195AFF"
-				padding="30px"
+				padding="32px"
 				alignItems="center"
 				justifyContent="center"
 				gap="20px"
+				overflow="hidden"
 			>
 				{/* Calendar */}
 				<Flex
@@ -95,7 +114,7 @@ const Home: React.FC = () => {
 						bgColor="white"
 						padding="10px"
 					>
-						{/* TZE XUAN TODO CALENDAR */}
+						{/* TZE XUAN TODO CALENDAR IN THIS BOX */}
 					</Box>
 					<Button
 						width="360px"
@@ -122,16 +141,26 @@ const Home: React.FC = () => {
 						fontWeight="bold"
 						color="#195AFF"
 						width="100%"
-						paddingLeft="24px"
+						paddingLeft="38px"
 					>
 						Upcoming Events
 					</Text>
-					<Flex flexDir="column" height="100%" width="100%" gap="8px">
+					<Flex
+						flexDir="column"
+						height="500px"
+						width="100%"
+						gap="12px"
+						overflowY="scroll"
+						overflow="auto"
+					>
 						<EventEntry>
 							<Text>Event 1</Text>
 						</EventEntry>
 						<EventEntry>
 							<Text>Event 2</Text>
+						</EventEntry>
+						<EventEntry>
+							<Text>Event 3</Text>
 						</EventEntry>
 					</Flex>
 				</Flex>
