@@ -14,7 +14,7 @@ Not sure on what to buy for your friend? Fret not, we have recommendations for y
 Moreover, by simplifying event coordination and inviting participants through our platform, users can effortlessly manage their calendars. As the platform grows and more users join, it becomes increasingly "sticky," encouraging users to keep using it to plan all their events in one place.
 
 #### Video Demo: 
-🔗 <insert_url>
+🔗 [Link to Video](https://drive.google.com/drive/folders/1Bj8cmMqy71FtyUclm_XhQRYNbt6Z9jw6?usp=sharing)
 
 ## Project Setup
 
