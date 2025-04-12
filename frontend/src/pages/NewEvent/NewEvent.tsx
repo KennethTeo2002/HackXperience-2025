@@ -9,6 +9,7 @@ import { Squash as Hamburger } from 'hamburger-react'
 import { useState } from 'react'
 import PresentsImage from '/images/PresentsImage.svg'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../Home/Navbar'
 
 const NewEvent: React.FC = () => {
 	const [isOpen, setOpen] = useState(false)
@@ -16,43 +17,7 @@ const NewEvent: React.FC = () => {
 
 	return (
 		<Flex height="100vh" flexDir="column" bgColor="#F9F9F9">
-			{/* Side navigation bar */}
-			<Flex
-				flexDir="column"
-				position="absolute"
-				height="100%"
-				width="320px"
-				left={isOpen ? '0' : '-320px'}
-				bgColor="white"
-				borderRadius="0 24px 24px 0"
-				boxShadow="xl"
-			>
-				Sidebar here
-			</Flex>
-			{/* Top bar */}
-			<Flex
-				flexDir="row"
-				width="100%"
-				alignItems="center"
-				justifyContent="center"
-				padding="12px 0"
-				bgColor="#195AFF"
-			>
-				<Box
-					paddingLeft={isOpen ? '250px' : '30px'}
-					position="absolute"
-					left="0"
-				>
-					<Hamburger
-						color={isOpen ? 'black' : 'white'}
-						toggled={isOpen}
-						toggle={setOpen}
-					/>
-				</Box>
-				<Text variant="logo" fontSize="4xl" color="white">
-					Gify
-				</Text>
-			</Flex>
+			<Navbar />
 			{/* Form */}
 			<Flex
 				height="100%"
@@ -60,6 +25,7 @@ const NewEvent: React.FC = () => {
 				alignItems="center"
 				justifyContent="center"
 				padding="24px"
+				zIndex="0"
 			>
 				<Flex
 					flexDir="row"
