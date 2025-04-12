@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { Button, Flex } from '@chakra-ui/react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import {
 	FaCalendarAlt,
 	FaClock,
@@ -122,7 +122,7 @@ const EventDetail: React.FC = () => {
 							style={{
 								fontSize: 'clamp(1.5rem, 5vw, 1.875rem)',
 								fontWeight: '700',
-								marginBottom: '1.5rem',
+								marginBottom: '0.6rem',
 								color: '#F36B7F',
 							}}
 						>
@@ -207,7 +207,7 @@ const EventDetail: React.FC = () => {
 								style={{
 									fontSize: '1.25rem',
 									fontWeight: '600',
-									marginBottom: '0.75rem',
+									marginBottom: '0.5rem',
 									color: '#4254B0',
 								}}
 							>
@@ -224,8 +224,8 @@ const EventDetail: React.FC = () => {
 									<Badge
 										key={pref.id}
 										style={{
-											background: '#F8F4EA',
-											color: '#4254B0',
+											background: '#40BFFF',
+											color: 'white',
 											fontWeight: '500',
 											padding: '0.25rem 0.75rem',
 											borderRadius: '9999px',
@@ -249,24 +249,25 @@ const EventDetail: React.FC = () => {
 						>
 							<p style={{ marginBottom: '1rem', color: '#555' }}>
 								Still stuck? Use our AI to generate gift ideas
-								or even some questions to ask the Giftee!
+								or even some questions to ask the Giftee for
+								better ideas!
 							</p>
 							<Flex gap="1rem" justify="center">
 								<Button
-									style={{
-										background: '#4254B0',
-										color: 'white',
-									}}
+									background="#4254B0"
+									color="white"
+									borderRadius="30px"
+									padding="0 20px"
 									onClick={handleGenerateQuestions}
 								>
 									Generate Gift Ideas
 								</Button>
 
 								<Button
-									style={{
-										background: '#4254B0',
-										color: 'white',
-									}}
+									background="#4254B0"
+									color="white"
+									borderRadius="30px"
+									padding="0 20px"
 									onClick={handleGenerateQuestions}
 								>
 									Generate Questions
@@ -318,7 +319,7 @@ const EventDetail: React.FC = () => {
 									<div
 										key={gifter.id}
 										style={{
-											background: '#F8F4EA',
+											background: '#F8CF61',
 											padding: '1rem',
 											borderRadius: '0.5rem',
 											display: 'flex',
@@ -334,21 +335,26 @@ const EventDetail: React.FC = () => {
 												gap: '0.5rem',
 											}}
 										>
-											<span style={{ fontWeight: '500' }}>
+											<span style={{ fontWeight: '600' }}>
 												{gifter.name}
 											</span>
-											<span style={{ color: '#666' }}>
+											<span
+												style={{
+													fontWeight: '400',
+												}}
+											>
 												bought a {gifter.gift}
 											</span>
 											{gifter.isRepeated && (
-												<Badge
-													style={{
-														background: '#DC3545',
-														color: 'white',
-													}}
+												<Box
+													color="white"
+													bgColor="#DA2F47"
+													borderRadius="20px"
+													padding="5px 12px"
+													fontSize="xs"
 												>
 													Repeated Gift
-												</Badge>
+												</Box>
 											)}
 										</div>
 										<div style={{ fontWeight: '600' }}>
@@ -360,38 +366,36 @@ const EventDetail: React.FC = () => {
 						)}
 
 						{/* Budget Summary */}
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'column',
-								gap: '0.75rem',
-								padding: '1rem 1.5rem',
-								background: '#f9f9f9',
-								borderRadius: '0.5rem',
-							}}
+						<Flex
+							flexDir="column"
+							gap="0.75rem"
+							padding="1rem 1.2rem"
+							bgColor="#f9f9f9"
+							borderRadius="0.5rem"
+							fontSize="lg"
 						>
-							<div
-								style={{
-									display: 'flex',
-									flexWrap: 'wrap',
-									gap: '2rem',
-								}}
-							>
-								<div style={{ fontWeight: '500' }}>
-									Budget: ${event.budget.min} - $
-									{event.budget.max}
-								</div>
-								<div
-									style={{
-										fontWeight: '500',
-										borderLeft: '1px solid #ddd',
-										paddingLeft: '2rem',
-									}}
+							<Flex flexDir="row" justifyContent="space-between">
+								<Flex width="60%">
+									<Text fontWeight="bold" marginRight="10px">
+										Budget:{' '}
+									</Text>
+									<Text>
+										${event.budget.min} - $
+										{event.budget.max}
+									</Text>
+								</Flex>
+								<Flex
+									fontWeight="500"
+									borderLeft="1px solid #ddd"
+									paddingLeft="30px"
 								>
-									Average Price: ${averagePrice.toFixed(2)}
-								</div>
-							</div>
-						</div>
+									<Text fontWeight="bold" marginRight="10px">
+										Average Price:
+									</Text>
+									<Text>${averagePrice.toFixed(2)}</Text>
+								</Flex>
+							</Flex>
+						</Flex>
 
 						{/* Back Button */}
 						<div
