@@ -10,6 +10,12 @@ export type EventPreference =
 	| 'Charity'
 	| 'Business'
 
+interface Gifter {
+	name: string
+	gift: string
+	amount: number
+}
+
 export interface Event {
 	id: string
 	title: string
@@ -19,4 +25,5 @@ export interface Event {
 	image?: string
 	preferences: EventPreference[]
 	createdAt: string
+	gifters?: Gifter[]
 }

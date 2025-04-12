@@ -11,6 +11,7 @@ export const mockEvents: Event[] = [
 		image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1000',
 		preferences: ['Technology', 'Networking', 'Education'],
 		createdAt: '2025-04-01T08:00:00Z',
+		gifters: [{ name: 'john', gift: 'plant', amount: 10 }],
 	},
 	{
 		id: '2',

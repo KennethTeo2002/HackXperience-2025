@@ -43,33 +43,11 @@ const EventDetail: React.FC = () => {
 
 	return (
 		<Flex>
-			<button
-				onClick={() => navigate(-1)}
-				className="flex items-center text-slate-600 hover:text-event mb-6 transition-colors"
-			>
-				Back to Events
-			</button>
-
 			<div className="bg-white rounded-xl shadow-sm overflow-hidden">
-				<div className="relative h-64 md:h-80 bg-slate-200">
-					{event.image ? (
-						<img
-							src={event.image}
-							alt={event.title}
-							className="w-full h-full object-cover"
-						/>
-					) : (
-						<div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
-							No Image Available
-						</div>
-					)}
-				</div>
-
 				<div className="p-6 md:p-8">
 					<h1 className="text-2xl md:text-3xl font-bold mb-3">
 						{event.title}
 					</h1>
-
 					<div className="flex flex-wrap gap-6 mb-6 text-slate-600">
 						<div className="flex items-center gap-2">
 							<IconButton
@@ -88,7 +66,6 @@ const EventDetail: React.FC = () => {
 							<span>{event.location}</span>
 						</div>
 					</div>
-
 					<div className="flex flex-wrap gap-2 mb-6">
 						{event.preferences.map((pref: EventPreference) => (
 							<Badge
@@ -99,6 +76,7 @@ const EventDetail: React.FC = () => {
 							</Badge>
 						))}
 					</div>
+					<Flex>Still stuck use AI</Flex>
 
 					{event.description && (
 						<div className="prose max-w-none mb-8">
@@ -110,15 +88,28 @@ const EventDetail: React.FC = () => {
 							</p>
 						</div>
 					)}
-
-					<div className="mt-8">
-						<Button
-							className="bg-event hover:bg-event-accent"
-							size="lg"
-						>
-							Register for this event
-						</Button>
-					</div>
+					<Flex>
+						{event.gifters && event.gifters.length > 0 && (
+							<div className="mb-6">
+								<h2 className="text-xl font-semibold mb-3">
+									Gifters
+								</h2>
+								{event.gifters.map((gifter: Gifter) => (
+									<div className="bg-yellow-100 p-4 rounded-lg flex items-center justify-between mb-3">
+										<div className="flex flex-col">
+											<span className="font-bold">
+												{gifter.name}
+											</span>
+											<span>{gifter.gift}</span>
+										</div>
+										<span className="text-xl font-semibold">
+											${gifter.amount.toFixed(2)}
+										</span>
+									</div>
+								))}
+							</div>
+						)}
+					</Flex>
 				</div>
 			</div>
 		</Flex>
