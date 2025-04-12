@@ -3,8 +3,10 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Button, Flex } from '@chakra-ui/react'
 import { IconButton, Badge } from '@chakra-ui/react'
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa'
+import { useQuery } from '@tanstack/react-query'
 import { getEventById } from '@/lib/mock-data'
 import { formatEventDate } from '@/lib/date-utils'
+import { EventPreference } from '../../types/event'
 
 const EventDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
@@ -88,7 +90,7 @@ const EventDetail: React.FC = () => {
 					</div>
 
 					<div className="flex flex-wrap gap-2 mb-6">
-						{event.preferences.map((pref) => (
+						{event.preferences.map((pref: EventPreference) => (
 							<Badge
 								key={pref}
 								className="bg-event-muted text-event"
