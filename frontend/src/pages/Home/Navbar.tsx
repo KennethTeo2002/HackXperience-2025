@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
 				bgColor="white"
 				borderRadius="0 24px 24px 0"
 				boxShadow="xl"
-				zIndex="10"
+				zIndex="2"
 			>
 				Sidebar here
 			</Flex>
@@ -28,12 +28,23 @@ const Navbar: React.FC = () => {
 				position="absolute"
 				width="100%"
 				height="100%"
-				zIndex="0"
+				bgColor="#F6F2ED"
 				overflow="hidden"
+				zIndex="0"
 			>
 				<Image src={leftBlob} marginBottom="-200px" width="640px" />
 				<Image src={rightBlob} marginLeft="360px" width="680px" />
 			</Flex>
+			{/* Burger Menu */}
+			<Box
+				paddingLeft={isOpen ? '250px' : '30px'}
+				position="absolute"
+				left="0"
+				top="22px"
+				zIndex="3"
+			>
+				<Hamburger color="black" toggled={isOpen} toggle={setOpen} />
+			</Box>
 			{/* Header */}
 			<Flex
 				flexDir="row"
@@ -44,18 +55,6 @@ const Navbar: React.FC = () => {
 				bgColor="white"
 				zIndex="1"
 			>
-				<Box
-					paddingLeft={isOpen ? '250px' : '30px'}
-					position="absolute"
-					left="0"
-					zIndex="11"
-				>
-					<Hamburger
-						color="black"
-						toggled={isOpen}
-						toggle={setOpen}
-					/>
-				</Box>
 				<Text variant="logo" fontSize="5xl" color="#003466">
 					Gify
 				</Text>
@@ -64,7 +63,7 @@ const Navbar: React.FC = () => {
 					width="46px"
 					position="absolute"
 					right="40px"
-					zIndex="1"
+					zIndex="3"
 				/>
 			</Flex>
 		</>

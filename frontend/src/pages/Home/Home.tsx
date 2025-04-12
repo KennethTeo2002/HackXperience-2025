@@ -53,7 +53,7 @@ const Home: React.FC = () => {
 				justifyContent="center"
 				gap="20px"
 				overflow="hidden"
-				zIndex="1"
+				zIndex="0"
 			>
 				{/* Calendar */}
 				<Flex
