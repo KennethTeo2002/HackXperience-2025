@@ -1,19 +1,11 @@
 import requests
 import json
 
-API_URL = "http://127.0.0.1:8000/recommend_gifts/"
-
-preferences_data = {
-    "interests": ["technology", "gaming", "music"],
-    "hobbies": ["coding", "playing video games", "listening to music"],
-    "favorite_things": ["gaming consoles", "smart gadgets", "headphones"],
-    "personality_traits": ["adventurous", "curious", "creative"]
-}
+API_URL = "http://127.0.0.1:8000/recommend_gifts/event/1"
 
 headers = {"Content-Type": "application/json"}
 
-response = requests.post(API_URL, headers=headers, data=json.dumps(preferences_data))
-
+response = requests.post(API_URL, headers=headers)
 
 if response.status_code == 200:
     print(response.json())
