@@ -248,18 +248,30 @@ const EventDetail: React.FC = () => {
 							}}
 						>
 							<p style={{ marginBottom: '1rem', color: '#555' }}>
-								Still stuck? Use our AI to generate some
-								questions to ask the Giftee!
+								Still stuck? Use our AI to generate gift ideas
+								or even some questions to ask the Giftee!
 							</p>
-							<Button
-								style={{
-									background: '#4254B0',
-									color: 'white',
-								}}
-								onClick={handleGenerateQuestions}
-							>
-								Generate Questions
-							</Button>
+							<Flex gap="1rem" justify="center">
+								<Button
+									style={{
+										background: '#4254B0',
+										color: 'white',
+									}}
+									onClick={handleGenerateQuestions}
+								>
+									Generate Gift Ideas
+								</Button>
+
+								<Button
+									style={{
+										background: '#4254B0',
+										color: 'white',
+									}}
+									onClick={handleGenerateQuestions}
+								>
+									Generate Questions
+								</Button>
+							</Flex>
 						</div>
 
 						{/* Gifters Section */}
