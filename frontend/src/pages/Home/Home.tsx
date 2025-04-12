@@ -29,8 +29,7 @@ const EventEntry: React.FC<{ children: ReactNode; to: string }> = ({
 					padding="10px"
 					boxShadow="md"
 					_hover={{
-						bgColor: '#195AFF',
-						color: 'white',
+						bgColor: '#FCF0E3',
 						height: '100%',
 						width: '100%',
 						boxShadow: 'lg',
@@ -145,56 +144,86 @@ const Home: React.FC = () => {
 					>
 						{events.map((event, index) => (
 							<EventEntry key={index} to={`/event/${event.id}`}>
-								<Box>
-									<Flex alignItems="center" gap="8px">
-										{/* Event Date */}
+								<Flex flexDir="row" width="100%">
+									{/* Event Date */}
+									<Flex
+										flexDir="column"
+										width="20%"
+										alignItems="center"
+										justifyContent="center"
+									>
 										<Text
+											variant="roboto"
 											fontSize="3xl"
-											fontWeight="bold"
-											color="#F25C54"
-											marginRight="10px"
+											fontWeight="semibold"
+											color="#F36B7F"
 										>
 											{new Date(
 												event.datetime,
 											).toLocaleDateString('en-US', {
 												month: 'short',
-												day: 'numeric',
 											})}
 										</Text>
-										<Text fontSize="xl" fontWeight="bold">
-											{event.title}
+										<Text
+											variant="roboto"
+											fontSize="4xl"
+											fontWeight="light"
+										>
+											{new Date(
+												event.datetime,
+											).toLocaleDateString('en-US', {
+												day: 'numeric',
+											})}
 										</Text>
 									</Flex>
 
 									<Flex
-										alignItems="center"
+										flexDir="column"
+										width="100%"
+										alignItems="start"
+										justifyContent="center"
 										color="#003466"
 										gap="8px"
-										marginTop="8px"
 									>
-										<FaClock />
-										<Text fontSize="sm">
-											{formatEventTime(event.datetime)}
+										<Text fontSize="xl" fontWeight="bold">
+											{event.title}
 										</Text>
-										|
-										<FaMapMarkerAlt />
-										<Text fontSize="sm">
-											{event.location}
-										</Text>
+										<Flex
+											flexDir="row"
+											gap="12px"
+											alignItems="center"
+										>
+											<FaClock fontSize="18px" />
+											<Text
+												fontSize="md"
+												marginLeft="-8px"
+											>
+												{formatEventTime(
+													event.datetime,
+												)}
+											</Text>
+											|
+											<FaMapMarkerAlt fontSize="18px" />
+											<Text
+												fontSize="md"
+												marginLeft="-8px"
+											>
+												{event.location}
+											</Text>
+										</Flex>
+										{/* Gifters Info */}
+										{event.gifters.length - 1 !== 1 ? (
+											<>
+												+ {event.gifters.length - 1}{' '}
+												{event.gifters.length - 1 === 1
+													? 'gifter'
+													: 'gifters'}
+											</>
+										) : (
+											''
+										)}
 									</Flex>
-
-									{/* Gifters Info */}
-									{event.gifters.length - 1 !== 1 ? (
-										<>
-											+ {event.gifters.length - 1}{' '}
-											{event.gifters.length - 1 === 1
-												? 'gifter'
-												: 'gifters'}
-										</>
-									) : (
-										''
-									)}
-								</Box>
+								</Flex>
 							</EventEntry>
 						))}
 					</Flex>
