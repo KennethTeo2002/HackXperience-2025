@@ -68,6 +68,63 @@ def generate_gift_ideas(event_id: str = None):
     
     except Exception as e:
         return {"error": str(e)}, 500
+    
+
+def generate_questions(event_id: str = None):
+    data = read_data_json()
+    events = data.get("events", [])
+
+    # Get event details for context
+    event_details = {}
+    preferences = []
+
+    if event_id:
+        for event in events:
+            if event.get("id") == event_id:
+                event_details = {
+                    "title": event.get("title", ""),
+                    "datetime": event.get("datetime", ""),
+                    "location": event.get("location", "")
+                }
+                preferences = [pref.get("name") for pref in event.get("preferences", [])]
+                break
+        if not preferences:
+            raise HTTPException(status_code=404, detail="Event not found or has no preferences")
+    else:
+        preference_names = set()
+        for event in events:
+            for pref in event.get("preferences", []):
+                preference_names.add(pref.get("name"))
+        preferences = list(preference_names)
+        event_details = {"title": "General event"}
+
+    prompt = (
+        f"Generate a list of questions that a gift giver could ask the recipient to better understand "
+        f"their preferences and help choose the perfect gift.\n\n"
+        f"Event details:\n"
+        f"Title: {event_details.get('title')}\n"
+        f"The recipient has shown interest in: {', '.join(preferences)}\n\n"
+        f"Please generate questions that would help understand the recipient's specific preferences "
+        f"within these interests, as well as general questions about their tastes and preferences.\n\n"
+        f"Return the questions in the following JSON format (and nothing else):\n"
+        f"{{\n"
+        f'  "questions": [\n'
+        f'    "Detailed question 1",\n'
+        f'    "Detailed question 2",\n'
+        f'    "Detailed question 3"\n'
+        f"    // Add more questions as needed\n"
+        f"  ]\n"
+        f"}}\n"
+    )
+
+    messages = [{"role": "user", "content": prompt}]
+
+    try:
+        response = openai_client.text_request(messages, "json_object")
+        return response
+    
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 
 @app.post("/recommend_gifts/event/{event_id}")
@@ -76,6 +133,15 @@ async def recommend_gifts(event_id: str):
         return generate_gift_ideas(event_id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/recommend_questions/event/{event_id}")
+async def recommend_questions(event_id: str):
+    try:
+        return generate_questions(event_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # Run the app with Uvicorn (in terminal)
 # uvicorn app:app --reload

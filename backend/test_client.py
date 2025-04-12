@@ -1,7 +1,8 @@
 import requests
 import json
 
-API_URL = "http://127.0.0.1:8000/recommend_gifts/event/1"
+# API_URL = "http://127.0.0.1:8000/recommend_gifts/event/1"
+API_URL = "http://127.0.0.1:8000/recommend_questions/event/1"
 
 headers = {"Content-Type": "application/json"}
 
