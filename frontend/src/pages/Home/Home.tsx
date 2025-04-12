@@ -40,35 +40,35 @@ const Home: React.FC = () => {
 	const navigate = useNavigate()
 
 	return (
-		<Flex height="100vh" flexDir="column" bgColor="#F9F9F9">
+		<Flex height="100vh" flexDir="column" bgColor="#F6F2ED">
 			<Navbar />
 			{/* Display board */}
 			<Flex
 				flexDir="row"
 				height="100%"
 				width="100%"
-				color="#195AFF"
+				color="#003466"
 				padding="32px"
 				alignItems="center"
 				justifyContent="center"
 				gap="20px"
 				overflow="hidden"
+				zIndex="1"
 			>
 				{/* Calendar */}
 				<Flex
 					flexDir="column"
 					height="100%"
 					width="40%"
-					gap="12px"
 					padding="10px"
 					alignItems="center"
 				>
 					<Text
 						fontSize="2xl"
 						fontWeight="bold"
-						color="#195AFF"
 						width="100%"
 						paddingLeft="86px"
+						marginBottom="12px"
 					>
 						Calendar
 					</Text>
@@ -77,23 +77,19 @@ const Home: React.FC = () => {
 						borderRadius="18px"
 						boxShadow="lg"
 						bgColor="white"
-						padding="10px"
 						alignItems="center"
 						justifyContent="center"
+						marginBottom="20px"
 					>
-						<Image
-							src={CalendarImg}
-							borderRadius="20px"
-							width="420px"
-						/>
+						<Image src={CalendarImg} width="400px" />
 					</Flex>
 					<Button
-						width="360px"
+						width="400px"
 						height="60px"
-						bgColor="#195AFF"
+						bgColor="#2E3EBD"
 						borderRadius="120px"
 						color="white"
-						marginTop="16px"
+						marginTop="0px"
 						onClick={() => navigate('new-event')}
 					>
 						Create New
@@ -111,7 +107,6 @@ const Home: React.FC = () => {
 					<Text
 						fontSize="2xl"
 						fontWeight="bold"
-						color="#195AFF"
 						width="100%"
 						paddingLeft="38px"
 					>
