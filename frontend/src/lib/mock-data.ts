@@ -29,7 +29,7 @@ export const mockEvents: Event[] = [
 				amount: 13.5,
 				isRepeated: true,
 			},
-			{ id: '3', name: 'John Doe', gift: 'Cat', amount: 50.0 },
+			{ id: '3', name: 'John Doe', gift: 'Cat', amount: 150.0 },
 		],
 	},
 ]
