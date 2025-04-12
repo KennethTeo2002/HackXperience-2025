@@ -17,8 +17,13 @@ import Navbar from '../Home/Navbar'
 const EventDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
 	const navigate = useNavigate()
-	const [isLoadingRecommendedGifts, setIsLoadingRecommendedGifts] = useState(false)
-    const [isLoadingRecommendQuestions, setIsLoadingRecommendQuestions] = useState(false)
+	const [isLoadingRecommendedGifts, setIsLoadingRecommendedGifts] =
+		useState(false)
+	const [isLoadingRecommendQuestions, setIsLoadingRecommendQuestions] =
+		useState(false)
+	const [giftsLoaded, setGiftsLoaded] = useState(false)
+	const [questionsLoaded, setQuestionsLoaded] = useState(false)
+	const [data, setData] = useState()
 
 	// Query to fetch event by ID from the public JSON file
 	const {
@@ -36,57 +41,65 @@ const EventDetail: React.FC = () => {
 		enabled: !!id,
 	})
 
+	const handleGenerateGifts = async () => {
+		if (!id) return
 
-    const handleGenerateGifts = async () => {
-        if (!id) return
+		setIsLoadingRecommendedGifts(true)
+		try {
+			const response = await fetch(
+				`http://127.0.0.1:8000/recommend_gifts/event/${id}`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			)
 
-        setIsLoadingRecommendedGifts(true)
-        try {
-            const response = await fetch(`http://127.0.0.1:8000/recommend_gifts/event/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+			if (!response.ok) {
+				throw new Error('Failed to generate gift ideas')
+			}
 
-            if (!response.ok) {
-                throw new Error('Failed to generate gift ideas')
-            }
+			const data = await response.json()
+			setQuestionsLoaded(false)
+			setGiftsLoaded(true)
+			setData(data)
+		} catch (error) {
+			console.error('Error generating gift ideas:', error)
+		} finally {
+			setIsLoadingRecommendedGifts(false)
+		}
+	}
 
-            const data = await response.json()
-            console.log(data)
-        } catch (error) {
-            console.error('Error generating gift ideas:', error)
-        } finally {
-            setIsLoadingRecommendedGifts(false)
-        }
-    }
+	const handleGenerateQuestions = async () => {
+		if (!id) return
 
+		setIsLoadingRecommendQuestions(true)
+		try {
+			const response = await fetch(
+				`http://127.0.0.1:8000/recommend_questions/event/${id}`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			)
 
-    const handleGenerateQuestions = async () => {
-        if (!id) return
+			if (!response.ok) {
+				throw new Error('Failed to generate questions')
+			}
 
-        setIsLoadingRecommendQuestions(true)
-        try {
-            const response = await fetch(`http://127.0.0.1:8000/recommend_questions/event/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-
-            if (!response.ok) {
-                throw new Error('Failed to generate questions')
-            }
-
-            const data = await response.json()
-            console.log(data)
-        } catch (error) {
-            console.error('Error generating questions:', error)
-        } finally {
-            setIsLoadingRecommendQuestions(false)
-        }
-    }
+			const data = await response.json()
+			setGiftsLoaded(false)
+			setQuestionsLoaded(true)
+			setData(data)
+		} catch (error) {
+			console.error('Error generating questions:', error)
+		} finally {
+			setIsLoadingRecommendQuestions(false)
+		}
+	}
 
 	if (isLoading) {
 		return (
@@ -292,7 +305,6 @@ const EventDetail: React.FC = () => {
 								background: '#F8F4EA',
 								borderRadius: '0.5rem',
 								padding: '1.5rem',
-								marginBottom: '2rem',
 								textAlign: 'center',
 							}}
 						>
@@ -323,10 +335,34 @@ const EventDetail: React.FC = () => {
 								</Button>
 							</Flex>
 						</div>
+						<Flex
+							flexDir="column"
+							maxWidth="400px"
+							marginTop="8px"
+							borderRadius="12px"
+							height="120px"
+							padding="40px"
+							display={
+								giftsLoaded || questionsLoaded
+									? 'initial'
+									: 'none'
+							}
+						>
+							<Text fontWeight="semibold">
+								AI-Recommended{' '}
+								{giftsLoaded ? 'Gifts' : 'Question Suggestions'}
+							</Text>
+							<Text overflow="text">{data}</Text>
+						</Flex>
 
 						{/* Gifters Section */}
 						{event.gifters && event.gifters.length > 0 && (
-							<div style={{ marginBottom: '2rem' }}>
+							<div
+								style={{
+									marginBottom: '2rem',
+									marginTop: '2rem',
+								}}
+							>
 								<div
 									style={{
 										display: 'flex',
