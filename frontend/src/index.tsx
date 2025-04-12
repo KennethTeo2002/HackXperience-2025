@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './pages/Routes'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-import '@fontsource/roboto/100.css'
-import '@fontsource/roboto/400.css'
+import '@fontsource-variable/roboto'
 import '@fontsource-variable/albert-sans'
 
 const theme = extendTheme({
