@@ -103,6 +103,7 @@ const EventDetail: React.FC = () => {
 				alignItems="center"
 				justifyContent="center"
 				padding="24px"
+				overflow="hidden"
 				zIndex="0"
 			>
 				<Card
