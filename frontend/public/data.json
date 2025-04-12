@@ -25,13 +25,18 @@
 					"amount": 13.5,
 					"isRepeated": true
 				},
-				{ "id": "3", "name": "George Pang", "gift": "Tabby Cat", "amount": 50.0 }
+				{
+					"id": "3",
+					"name": "George Pang",
+					"gift": "Tabby Cat",
+					"amount": 50.0
+				}
 			]
 		},
 		{
 			"id": "2",
-			"title": "John Tan's Birthday",
-			"datetime": "2025-08-1T11:45:00",
+			"title": "John Lim's Birthday",
+			"datetime": "2025-08-01T11:45:00",
 			"location": "Temasek Club House",
 			"preferences": [
 				{ "id": "1", "name": "Technology" },
@@ -41,19 +46,49 @@
 			"gifters": [
 				{
 					"id": "1",
-					"name": "John Doe",
-					"gift": "Plant",
+					"name": "Darren Yap",
+					"gift": "One piece figurine",
 					"amount": 12.5,
 					"isRepeated": true
 				},
 				{
 					"id": "2",
 					"name": "John Doe",
-					"gift": "Plant",
+					"gift": "Luffy figurine",
 					"amount": 13.5,
 					"isRepeated": true
 				},
-				{ "id": "3", "name": "John Doe", "gift": "Cat", "amount": 50.0 }
+				{
+					"id": "3",
+					"name": "Rachel Tan",
+					"gift": "ear piece",
+					"amount": 50.0
+				}
+			]
+		},
+		{
+			"id": "3",
+			"title": "Kayle Quak's Birthday",
+			"datetime": "2025-11-03T10:00:00",
+			"location": "Kayle Quak's house",
+			"preferences": [
+				{ "id": "1", "name": "Cooking" },
+				{ "id": "2", "name": "Pets" }
+			],
+			"budget": { "min": 10, "max": 20 },
+			"gifters": [
+				{
+					"id": "1",
+					"name": "Darren Yap",
+					"gift": "frying pan",
+					"amount": 12.5
+				},
+				{
+					"id": "2",
+					"name": "Tim Yap",
+					"gift": "Cat collar",
+					"amount": 12.5
+				}
 			]
 		}
 	]
