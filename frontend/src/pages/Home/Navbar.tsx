@@ -1,9 +1,10 @@
-import { Flex, Box, Text, Image } from '@chakra-ui/react'
+import { Flex, Box, Text, Image, Center} from "@chakra-ui/react"
 import { Squash as Hamburger } from 'hamburger-react'
 import { useState } from 'react'
 import leftBlob from '/images/HomeBgBlob1.svg'
 import rightBlob from '/images/HomeBgBlob2.svg'
 import notificationImg from '/images/Notification.png'
+import profilePhoto from '/images/DefaultProfilePhoto.png'
 
 const Navbar: React.FC = () => {
 	const [isOpen, setOpen] = useState(false)
@@ -16,12 +17,32 @@ const Navbar: React.FC = () => {
 				height="100%"
 				width="320px"
 				left={isOpen ? '0' : '-320px'}
-				bgColor="white"
+				bgColor="#FCF0E3"
 				borderRadius="0 24px 24px 0"
 				boxShadow="xl"
 				zIndex="2"
 			>
-				Sidebar here
+				<Box height="40px"></Box>
+				<Box padding="20px">
+					<Center>
+						<Image 
+							src={profilePhoto}
+							width="150px"
+							justifyItems="center">
+						</Image>
+					</Center>
+				</Box>
+				
+				<Center>
+					<Text 
+						variant="roboto" 
+						fontWeight="medium"
+						margin="0px">
+						@wiwiwi_cat
+					</Text>
+				</Center>
+				
+				
 			</Flex>
 			{/* BG Image */}
 			<Flex
