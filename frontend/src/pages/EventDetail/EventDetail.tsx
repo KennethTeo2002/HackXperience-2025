@@ -10,7 +10,6 @@ import {
 } from 'react-icons/fa'
 import { Badge } from '@/components/badge'
 import { Card, CardContent } from '@/components/card'
-import { getEventById } from '@/lib/mock-data'
 import { formatEventDate, formatEventTime } from '@/lib/date-utils'
 import { Gifter } from '@/types/event'
 
@@ -18,13 +17,19 @@ const EventDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
 	const navigate = useNavigate()
 
+	// Query to fetch event by ID from the public JSON file
 	const {
 		data: event,
 		isLoading,
 		error,
 	} = useQuery({
 		queryKey: ['event', id],
-		queryFn: () => getEventById(id || '1'),
+		queryFn: async () => {
+			const response = await fetch(`/data.json`)
+			if (!response.ok) throw new Error('Event not found')
+			const data = await response.json()
+			return data.events.find((event: any) => event.id === id)
+		},
 		enabled: !!id,
 	})
 
@@ -85,7 +90,7 @@ const EventDetail: React.FC = () => {
 
 	const handleGenerateQuestions = () => {
 		console.log('Generating questions')
-		// Would implement AI generation functionality here
+		// Implement AI question generation functionality here
 	}
 
 	return (
