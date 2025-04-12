@@ -1,7 +1,8 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
-import { Squash as Hamburger } from 'hamburger-react'
-import { ReactNode, useState } from 'react'
+import { Button, Flex, Text, Image } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
+import CalendarImg from '/images/Calendar.png'
+import Navbar from './Navbar'
 
 const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
@@ -36,95 +37,59 @@ const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
 }
 
 const Home: React.FC = () => {
-	const [isOpen, setOpen] = useState(false)
 	const navigate = useNavigate()
 
 	return (
-		<Flex height="100vh" flexDir="column" bgColor="#F9F9F9">
-			{/* Side navigation bar */}
-			<Flex
-				flexDir="column"
-				position="absolute"
-				height="100%"
-				width="320px"
-				left={isOpen ? '0' : '-320px'}
-				bgColor="white"
-				borderRadius="0 24px 24px 0"
-				boxShadow="xl"
-			>
-				Sidebar here
-			</Flex>
-			{/* Top bar */}
-			<Flex
-				flexDir="row"
-				width="100%"
-				alignItems="center"
-				justifyContent="center"
-				padding="12px 0"
-				bgColor="#195AFF"
-			>
-				<Box
-					paddingLeft={isOpen ? '250px' : '30px'}
-					position="absolute"
-					left="0"
-				>
-					<Hamburger
-						color={isOpen ? 'black' : 'white'}
-						toggled={isOpen}
-						toggle={setOpen}
-					/>
-				</Box>
-				<Text variant="logo" fontSize="4xl" color="white">
-					Gify
-				</Text>
-			</Flex>
+		<Flex height="100vh" flexDir="column" bgColor="#F6F2ED">
+			<Navbar />
 			{/* Display board */}
 			<Flex
 				flexDir="row"
 				height="100%"
 				width="100%"
-				color="#195AFF"
+				color="#003466"
 				padding="32px"
 				alignItems="center"
 				justifyContent="center"
 				gap="20px"
 				overflow="hidden"
+				zIndex="0"
 			>
 				{/* Calendar */}
 				<Flex
 					flexDir="column"
 					height="100%"
-					width="100%"
-					gap="12px"
+					width="40%"
 					padding="10px"
 					alignItems="center"
 				>
 					<Text
 						fontSize="2xl"
 						fontWeight="bold"
-						color="#195AFF"
 						width="100%"
-						paddingLeft="24px"
+						paddingLeft="86px"
+						marginBottom="12px"
 					>
 						Calendar
 					</Text>
-					<Box
-						width="100%"
+					<Flex
 						height="100%"
 						borderRadius="18px"
 						boxShadow="lg"
 						bgColor="white"
-						padding="10px"
+						alignItems="center"
+						justifyContent="center"
+						marginBottom="20px"
 					>
-						{/* TZE XUAN TODO CALENDAR IN THIS BOX */}
-					</Box>
+						<Image src={CalendarImg} width="400px" />
+					</Flex>
 					<Button
-						width="360px"
+						width="400px"
 						height="60px"
-						bgColor="#195AFF"
+						bgColor="#2E3EBD"
 						borderRadius="120px"
 						color="white"
-						marginTop="16px"
+						marginTop="0px"
 						onClick={() => navigate('new-event')}
 					>
 						Create New
@@ -134,7 +99,7 @@ const Home: React.FC = () => {
 				<Flex
 					flexDir="column"
 					height="100%"
-					width="100%"
+					width="60%"
 					gap="12px"
 					padding="10px"
 					alignItems="center"
@@ -142,7 +107,6 @@ const Home: React.FC = () => {
 					<Text
 						fontSize="2xl"
 						fontWeight="bold"
-						color="#195AFF"
 						width="100%"
 						paddingLeft="38px"
 					>
