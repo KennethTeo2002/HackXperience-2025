@@ -5,7 +5,6 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import '@fontsource/roboto/100.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource-variable/albert-sans'
-import './main.css'
 
 const theme = extendTheme({
 	initialColorMode: `light`,
@@ -18,6 +17,9 @@ const theme = extendTheme({
 			variants: {
 				logo: {
 					fontFamily: `'Albert Sans Variable', sans-serif`,
+				},
+				roboto: {
+					fontFamily: `'Roboto Variable', sans-serif`,
 				},
 			},
 		},

@@ -417,7 +417,7 @@
     "@chakra-ui/react-use-safe-layout-effect" "2.1.0"
     "@chakra-ui/shared-utils" "2.0.5"
 
-"@chakra-ui/input@2.1.2":
+"@chakra-ui/input@2.1.2", "@chakra-ui/input@^2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@chakra-ui/input/-/input-2.1.2.tgz#0cad49ec372f8f21f2f4f1db365f34b9a708ff9d"
   integrity sha512-GiBbb3EqAA8Ph43yGa6Mc+kUPjh4Spmxp1Pkelr8qtudpc3p2PJOOebLpd90mcqw8UePPa+l6YhhPtp6o0irhw==
@@ -1287,6 +1287,11 @@
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/@fontsource-variable/albert-sans/-/albert-sans-5.2.5.tgz#881b382484df02fa2f966df3f0cca94cecbe54fc"
   integrity sha512-QOnYtT8yao9vPnuWiCDOuLZXjWxwINZBCr+gDAEmiFEhFXt69FKgYjWMPbJVjGwYuS/aEr1NZxPL9Cf56Dn+gQ==
+
+"@fontsource-variable/roboto@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/roboto/-/roboto-5.2.5.tgz#000095be8ec37991efae5de8c6404e564160f325"
+  integrity sha512-csqBSOWXv0h5IbPhEqYJua6/nxl7dSNZbBOMeXSO9aqzgPw3GpfgC9kL5M6ULFLRaoDoBD4U9QctoDLKMaTyMg==
 
 "@fontsource/roboto@^5.0.13":
   version "5.0.13"
