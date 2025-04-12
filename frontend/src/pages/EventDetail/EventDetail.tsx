@@ -6,7 +6,7 @@ import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa'
 import { useQuery } from '@tanstack/react-query'
 import { getEventById } from '@/lib/mock-data'
 import { formatEventDate } from '@/lib/date-utils'
-import { EventPreference } from '../../types/event'
+import { EventPreference, Gifter } from '../../types/event'
 
 const EventDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
@@ -40,6 +40,17 @@ const EventDetail: React.FC = () => {
 			</div>
 		)
 	}
+	const calculateAveragePrice = (gifters: Gifter[]): number => {
+		const totalAmount = gifters.reduce(
+			(acc, gifter) => acc + gifter.amount,
+			0,
+		)
+		return totalAmount / gifters.length
+	}
+
+	const averagePrice = event.gifters
+		? calculateAveragePrice(event.gifters)
+		: 0
 
 	return (
 		<Flex>
@@ -76,18 +87,12 @@ const EventDetail: React.FC = () => {
 							</Badge>
 						))}
 					</div>
-					<Flex>Still stuck use AI</Flex>
+					<Flex>
+						Still stuck? Use our AI to generate some questions to
+						ask the Giftee!
+					</Flex>
+					<Button>Generate Questions</Button>
 
-					{event.description && (
-						<div className="prose max-w-none mb-8">
-							<h2 className="text-xl font-semibold mb-2">
-								About this event
-							</h2>
-							<p className="text-slate-700">
-								{event.description}
-							</p>
-						</div>
-					)}
 					<Flex>
 						{event.gifters && event.gifters.length > 0 && (
 							<div className="mb-6">
@@ -97,18 +102,23 @@ const EventDetail: React.FC = () => {
 								{event.gifters.map((gifter: Gifter) => (
 									<div className="bg-yellow-100 p-4 rounded-lg flex items-center justify-between mb-3">
 										<div className="flex flex-col">
-											<span className="font-bold">
-												{gifter.name}
-											</span>
-											<span>{gifter.gift}</span>
+											<p>
+												{' '}
+												{gifter.name} bought a{' '}
+												{gifter.gift}$
+												{gifter.amount.toFixed(2)}
+											</p>
 										</div>
-										<span className="text-xl font-semibold">
-											${gifter.amount.toFixed(2)}
-										</span>
 									</div>
 								))}
 							</div>
 						)}
+					</Flex>
+					<Flex>
+						<p>
+							Budget: {event.budget} Average Price: $
+							{averagePrice.toFixed(2)}
+						</p>
 					</Flex>
 				</div>
 			</div>
