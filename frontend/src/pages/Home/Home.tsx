@@ -1,43 +1,66 @@
-import { Button, Flex, Text, Image } from '@chakra-ui/react'
-import { ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Button, Flex, Text, Image, Box } from '@chakra-ui/react'
+import { ReactNode, useEffect, useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import CalendarImg from '/images/Calendar.png'
 import Navbar from './Navbar'
+import { FaMapMarkerAlt, FaClock } from 'react-icons/fa'
+import { formatEventTime } from '@/lib/date-utils'
 
-const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
+const EventEntry: React.FC<{ children: ReactNode; to: string }> = ({
+	children,
+	to,
+}) => {
 	return (
-		<Flex
-			width="100%"
-			height="128px"
-			justifyContent="center"
-			alignItems="center"
-			flexShrink="0"
-		>
+		<Link to={to}>
 			<Flex
-				flexDir="row"
-				bgColor="white"
-				height="95%"
-				width="95%"
-				borderRadius="18px"
-				margin="10px"
-				padding="10px"
-				boxShadow="md"
-				_hover={{
-					bgColor: '#195AFF',
-					color: 'white',
-					height: '100%',
-					width: '100%',
-					boxShadow: 'lg',
-				}}
+				width="100%"
+				height="128px"
+				justifyContent="center"
+				alignItems="center"
+				flexShrink="0"
 			>
-				{children}
+				<Flex
+					flexDir="row"
+					bgColor="white"
+					height="95%"
+					width="95%"
+					borderRadius="18px"
+					margin="10px"
+					padding="10px"
+					boxShadow="md"
+					_hover={{
+						bgColor: '#195AFF',
+						color: 'white',
+						height: '100%',
+						width: '100%',
+						boxShadow: 'lg',
+					}}
+				>
+					{children}
+				</Flex>
 			</Flex>
-		</Flex>
+		</Link>
 	)
 }
 
 const Home: React.FC = () => {
 	const navigate = useNavigate()
+	const [events, setEvents] = useState<any[]>([])
+
+	// Fetch the events
+	useEffect(() => {
+		const fetchEvents = async () => {
+			try {
+				const response = await fetch('/data.json') // Adjust your API or path here
+				const data = await response.json()
+				setEvents(data.events) // Assuming 'events' is an array in the fetched data
+			} catch (error) {
+				console.error('Error fetching events:', error)
+			}
+		}
+
+		fetchEvents()
+	}, [])
 
 	return (
 		<Flex height="100vh" flexDir="column" bgColor="#F6F2ED">
@@ -120,15 +143,60 @@ const Home: React.FC = () => {
 						overflowY="scroll"
 						overflow="auto"
 					>
-						<EventEntry>
-							<Text>Event 1</Text>
-						</EventEntry>
-						<EventEntry>
-							<Text>Event 2</Text>
-						</EventEntry>
-						<EventEntry>
-							<Text>Event 3</Text>
-						</EventEntry>
+						{events.map((event, index) => (
+							<EventEntry key={index} to={`/event/${event.id}`}>
+								<Box>
+									<Flex alignItems="center" gap="8px">
+										{/* Event Date */}
+										<Text
+											fontSize="3xl"
+											fontWeight="bold"
+											color="#F25C54"
+											marginRight="10px"
+										>
+											{new Date(
+												event.datetime,
+											).toLocaleDateString('en-US', {
+												month: 'short',
+												day: 'numeric',
+											})}
+										</Text>
+										<Text fontSize="xl" fontWeight="bold">
+											{event.title}
+										</Text>
+									</Flex>
+
+									<Flex
+										alignItems="center"
+										color="#003466"
+										gap="8px"
+										marginTop="8px"
+									>
+										<FaClock />
+										<Text fontSize="sm">
+											{formatEventTime(event.datetime)}
+										</Text>
+										|
+										<FaMapMarkerAlt />
+										<Text fontSize="sm">
+											{event.location}
+										</Text>
+									</Flex>
+
+									{/* Gifters Info */}
+									{event.gifters.length - 1 !== 1 ? (
+										<>
+											+ {event.gifters.length - 1}{' '}
+											{event.gifters.length - 1 === 1
+												? 'gifter'
+												: 'gifters'}
+										</>
+									) : (
+										''
+									)}
+								</Box>
+							</EventEntry>
+						))}
 					</Flex>
 				</Flex>
 			</Flex>
