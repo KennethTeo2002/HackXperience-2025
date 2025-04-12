@@ -123,7 +123,7 @@ const EventDetail: React.FC = () => {
 								fontSize: 'clamp(1.5rem, 5vw, 1.875rem)',
 								fontWeight: '700',
 								marginBottom: '1.5rem',
-								color: '#4254B0',
+								color: '#F36B7F',
 							}}
 						>
 							{event.title}
