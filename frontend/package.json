@@ -8,10 +8,12 @@
     "url": "https://kahho.tech"
   },
   "dependencies": {
+    "@chakra-ui/input": "^2.1.2",
     "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fontsource-variable/albert-sans": "^5.2.5",
+    "@fontsource-variable/roboto": "^5.2.5",
     "@fontsource/roboto": "^5.0.13",
     "framer-motion": "^11.0.6",
     "hamburger-react": "^2.5.2",

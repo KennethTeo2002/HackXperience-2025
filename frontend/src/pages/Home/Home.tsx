@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import { Squash as Hamburger } from 'hamburger-react'
 import { ReactNode, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
@@ -36,6 +37,7 @@ const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const Home: React.FC = () => {
 	const [isOpen, setOpen] = useState(false)
+	const navigate = useNavigate()
 
 	return (
 		<Flex height="100vh" flexDir="column" bgColor="#F9F9F9">
@@ -123,6 +125,7 @@ const Home: React.FC = () => {
 						borderRadius="120px"
 						color="white"
 						marginTop="16px"
+						onClick={() => navigate('new-event')}
 					>
 						Create New
 					</Button>
