@@ -107,7 +107,8 @@ const EventDetail: React.FC = () => {
 			>
 				<Card
 					style={{
-						overflow: 'hidden',
+						overflowY: 'auto', // Enable vertical scrolling
+						maxHeight: '80vh', // Set the maximum height of the card (you can adjust as needed)
 						border: 'none',
 						boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
 						borderRadius: '0.75rem',
