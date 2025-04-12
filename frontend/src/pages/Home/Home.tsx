@@ -1,7 +1,8 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
-import { Squash as Hamburger } from 'hamburger-react'
-import { ReactNode, useState } from 'react'
+import { Button, Flex, Text, Image } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
+import CalendarImg from '/images/Calendar.png'
+import Navbar from './Navbar'
 
 const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
 	return (
@@ -36,48 +37,11 @@ const EventEntry: React.FC<{ children: ReactNode }> = ({ children }) => {
 }
 
 const Home: React.FC = () => {
-	const [isOpen, setOpen] = useState(false)
 	const navigate = useNavigate()
 
 	return (
 		<Flex height="100vh" flexDir="column" bgColor="#F9F9F9">
-			{/* Side navigation bar */}
-			<Flex
-				flexDir="column"
-				position="absolute"
-				height="100%"
-				width="320px"
-				left={isOpen ? '0' : '-320px'}
-				bgColor="white"
-				borderRadius="0 24px 24px 0"
-				boxShadow="xl"
-			>
-				Sidebar here
-			</Flex>
-			{/* Top bar */}
-			<Flex
-				flexDir="row"
-				width="100%"
-				alignItems="center"
-				justifyContent="center"
-				padding="12px 0"
-				bgColor="#195AFF"
-			>
-				<Box
-					paddingLeft={isOpen ? '250px' : '30px'}
-					position="absolute"
-					left="0"
-				>
-					<Hamburger
-						color={isOpen ? 'black' : 'white'}
-						toggled={isOpen}
-						toggle={setOpen}
-					/>
-				</Box>
-				<Text variant="logo" fontSize="4xl" color="white">
-					Gify
-				</Text>
-			</Flex>
+			<Navbar />
 			{/* Display board */}
 			<Flex
 				flexDir="row"
@@ -94,7 +58,7 @@ const Home: React.FC = () => {
 				<Flex
 					flexDir="column"
 					height="100%"
-					width="100%"
+					width="40%"
 					gap="12px"
 					padding="10px"
 					alignItems="center"
@@ -104,20 +68,25 @@ const Home: React.FC = () => {
 						fontWeight="bold"
 						color="#195AFF"
 						width="100%"
-						paddingLeft="24px"
+						paddingLeft="86px"
 					>
 						Calendar
 					</Text>
-					<Box
-						width="100%"
+					<Flex
 						height="100%"
 						borderRadius="18px"
 						boxShadow="lg"
 						bgColor="white"
 						padding="10px"
+						alignItems="center"
+						justifyContent="center"
 					>
-						{/* TZE XUAN TODO CALENDAR IN THIS BOX */}
-					</Box>
+						<Image
+							src={CalendarImg}
+							borderRadius="20px"
+							width="420px"
+						/>
+					</Flex>
 					<Button
 						width="360px"
 						height="60px"
@@ -134,7 +103,7 @@ const Home: React.FC = () => {
 				<Flex
 					flexDir="column"
 					height="100%"
-					width="100%"
+					width="60%"
 					gap="12px"
 					padding="10px"
 					alignItems="center"
