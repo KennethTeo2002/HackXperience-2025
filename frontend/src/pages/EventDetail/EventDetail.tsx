@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
@@ -17,6 +17,8 @@ import Navbar from '../Home/Navbar'
 const EventDetail: React.FC = () => {
 	const { id } = useParams<{ id: string }>()
 	const navigate = useNavigate()
+	const [isLoadingRecommendedGifts, setIsLoadingRecommendedGifts] = useState(false)
+    const [isLoadingRecommendQuestions, setIsLoadingRecommendQuestions] = useState(false)
 
 	// Query to fetch event by ID from the public JSON file
 	const {
@@ -33,6 +35,58 @@ const EventDetail: React.FC = () => {
 		},
 		enabled: !!id,
 	})
+
+
+    const handleGenerateGifts = async () => {
+        if (!id) return
+
+        setIsLoadingRecommendedGifts(true)
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/recommend_gifts/event/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to generate gift ideas')
+            }
+
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            console.error('Error generating gift ideas:', error)
+        } finally {
+            setIsLoadingRecommendedGifts(false)
+        }
+    }
+
+
+    const handleGenerateQuestions = async () => {
+        if (!id) return
+
+        setIsLoadingRecommendQuestions(true)
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/recommend_questions/event/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to generate questions')
+            }
+
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            console.error('Error generating questions:', error)
+        } finally {
+            setIsLoadingRecommendQuestions(false)
+        }
+    }
 
 	if (isLoading) {
 		return (
@@ -88,11 +142,6 @@ const EventDetail: React.FC = () => {
 	const averagePrice = event.gifters
 		? calculateAveragePrice(event.gifters)
 		: 0
-
-	const handleGenerateQuestions = () => {
-		console.log('Generating questions')
-		// Implement AI question generation functionality here
-	}
 
 	return (
 		<Flex height="100vh" flexDir="column" bgColor="#F6F2ED">
@@ -258,7 +307,7 @@ const EventDetail: React.FC = () => {
 									color="white"
 									borderRadius="30px"
 									padding="0 20px"
-									onClick={handleGenerateQuestions}
+									onClick={handleGenerateGifts}
 								>
 									Generate Gift Ideas
 								</Button>
