@@ -4,10 +4,12 @@ import { useState } from 'react'
 import leftBlob from '/images/HomeBgBlob1.svg'
 import rightBlob from '/images/HomeBgBlob2.svg'
 import notificationImg from '/images/Notification.png'
-import profilePhoto from '/images/DefaultProfilePhoto.png'
+import profilePhoto from '/images/ProfilePhoto.png'
+import { useNavigate } from "react-router-dom"
 
 const Navbar: React.FC = () => {
 	const [isOpen, setOpen] = useState(false)
+	const navigate = useNavigate()
 	return (
 		<>
 			{/* Side navigation bar */}
@@ -23,7 +25,8 @@ const Navbar: React.FC = () => {
 				zIndex="2"
 			>
 				<Box height="40px"></Box>
-				<Box padding="20px">
+
+				<Flex padding="20px" justifyContent="center">
 					<Center>
 						<Image 
 							src={profilePhoto}
@@ -31,17 +34,57 @@ const Navbar: React.FC = () => {
 							justifyItems="center">
 						</Image>
 					</Center>
-				</Box>
+				</Flex>
 				
 				<Center>
-					<Text 
+					<Text
 						variant="roboto" 
 						fontWeight="medium"
-						margin="0px">
+						color="#003466"
+						fontSize="30px"
+						height="80px"
+						>
 						@wiwiwi_cat
 					</Text>
 				</Center>
-				
+
+				<Flex 
+					direction="column" 
+					textAlign="left" 
+					borderLeftWidth="80px" 
+					borderLeftColor="transparent"
+					gap="20px"
+				>
+					<button>
+						<Flex
+							fontStyle="roboto" 
+							fontWeight="light"
+							fontSize="30px"
+							color="#003466"
+							_hover={{
+								textDecoration: 'underline',
+								color: '#F36B7F'
+							}}
+							>
+							Events
+						</Flex>
+					</button>
+					<button>
+							<Flex 
+							fontStyle="roboto" 
+							fontWeight="light"
+							fontSize="30px"
+							color="#003466"
+							_hover={{
+								textDecoration: 'underline',
+								color: '#F36B7F'
+							}}
+							>
+							Calendar
+						</Flex>
+					</button>
+				</Flex>
+
 				
 			</Flex>
 			{/* BG Image */}
@@ -76,7 +119,15 @@ const Navbar: React.FC = () => {
 				bgColor="white"
 				zIndex="1"
 			>
-				<Text variant="logo" fontSize="5xl" color="#003466">
+				<Text 
+					variant="logo"
+					fontSize="5xl" 
+					color="#003466"
+					_hover={{
+						cursor: "pointer"
+					}} 
+					onClick={() => navigate("/")}
+				>
 					Gify
 				</Text>
 				<Image
